@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f8faf7;
+  color: #14532d;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl border border-primary-100 shadow-sm;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 active:scale-[0.98] px-5 py-3;
+  }
+  .btn-secondary {
+    @apply btn bg-primary-50 text-primary-700 hover:bg-primary-100 border border-primary-200 px-5 py-3;
+  }
+  .btn-ghost {
+    @apply btn text-primary-700 hover:bg-primary-50 px-4 py-2;
+  }
+  .input {
+    @apply w-full rounded-xl border border-primary-200 bg-white px-4 py-3 text-primary-900 placeholder-primary-300 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-200 transition;
+  }
+  .label {
+    @apply block text-sm font-semibold text-primary-800 mb-2;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .section-title {
+    @apply text-xl font-bold text-primary-900;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #bbf7d0; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #86efac; }
