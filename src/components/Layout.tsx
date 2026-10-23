@@ -65,7 +65,11 @@ export function Layout({ current, onNavigate, farmName, children, onShowTools }:
           </div>
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+        <div className="px-3 pt-3 pb-1">
+          <LanguageSelector />
+        </div>
+
+        <nav className="flex-1 overflow-y-auto px-3 py-2 space-y-1">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const active = current === item.key;
@@ -87,9 +91,8 @@ export function Layout({ current, onNavigate, farmName, children, onShowTools }:
         </nav>
 
         <div className="px-3 py-3 border-t border-primary-100">
-          <LanguageSelector />
           {farmName && (
-            <div className="mt-2 px-1">
+            <div className="px-1">
               <p className="text-[11px] text-primary-500">{t('app.signedInAs')}</p>
               <p className="text-sm font-semibold text-primary-800 truncate">{farmName}</p>
             </div>
