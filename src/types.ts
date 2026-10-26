@@ -84,7 +84,11 @@ export type PageKey =
   | 'farmer-questions'
   | 'talk'
   | 'intelligence'
-  | 'tools';
+  | 'tools'
+  | 'mandi-prices'
+  | 'schemes'
+  | 'business-planner'
+  | 'rainfall-advisor';
 
 export interface WeatherData {
   temperature: number;
