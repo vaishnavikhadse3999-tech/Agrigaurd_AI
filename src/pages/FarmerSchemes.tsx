@@ -15,6 +15,7 @@ interface Scheme {
   applyUrl: string;
   verified: boolean;
   state: 'Central' | 'Maharashtra' | 'Both';
+  status: 'open' | 'closed' | 'unknown';
 }
 
 const SCHEMES: Scheme[] = [
@@ -30,6 +31,7 @@ const SCHEMES: Scheme[] = [
     applyUrl: 'https://pmkisan.gov.in/',
     verified: true,
     state: 'Central',
+    status: 'open',
   },
   {
     id: 'pmfby',
@@ -43,6 +45,7 @@ const SCHEMES: Scheme[] = [
     applyUrl: 'https://pmfby.gov.in/',
     verified: true,
     state: 'Central',
+    status: 'open',
   },
   {
     id: 'pmksym',
@@ -56,6 +59,7 @@ const SCHEMES: Scheme[] = [
     applyUrl: 'https://pmkmy.gov.in/',
     verified: true,
     state: 'Central',
+    status: 'open',
   },
   {
     id: 'pmkky',
@@ -69,6 +73,7 @@ const SCHEMES: Scheme[] = [
     applyUrl: 'https://pmkky.gov.in/',
     verified: true,
     state: 'Central',
+    status: 'unknown',
   },
   {
     id: 'smam',
@@ -82,6 +87,7 @@ const SCHEMES: Scheme[] = [
     applyUrl: 'https://farmmachinery.gov.in/',
     verified: true,
     state: 'Central',
+    status: 'unknown',
   },
   {
     id: 'maha-dbtcrop',
@@ -92,9 +98,10 @@ const SCHEMES: Scheme[] = [
     documents: ['Aadhaar card', '7/12 extract', 'Bank account details', 'PMFBY enrollment proof'],
     applicationProcess: 'Apply through the MahaDBT farmer portal with your PMFBY enrollment details. Bank verification required.',
     deadline: 'Aligned with crop insurance enrollment windows',
-    applyUrl: 'https://mahadbtmahait.gov.in/',
+    applyUrl: 'https://mahadbt.maharashtra.gov.in/Farmer/RegistrationLogin/RegistrationLogin',
     verified: true,
     state: 'Maharashtra',
+    status: 'open',
   },
   {
     id: 'mahadbtt',
@@ -105,9 +112,10 @@ const SCHEMES: Scheme[] = [
     documents: ['Aadhaar card', '7/12 extract', 'Bank account details', 'Caste/income certificate (if applicable)', 'Machinery quotation'],
     applicationProcess: 'Register on the MahaDBT portal, select the agriculture machinery scheme, and submit the application online with documents.',
     deadline: 'Applications open periodically; check MahaDBT portal for notifications',
-    applyUrl: 'https://mahadbtmahait.gov.in/',
+    applyUrl: 'https://mahadbt.maharashtra.gov.in/Farmer/RegistrationLogin/RegistrationLogin',
     verified: true,
     state: 'Maharashtra',
+    status: 'unknown',
   },
   {
     id: 'seedsubsidy',
@@ -118,9 +126,10 @@ const SCHEMES: Scheme[] = [
     documents: ['Aadhaar card', '7/12 extract', 'Bank account details', 'Seed purchase receipt from authorized dealer'],
     applicationProcess: 'Purchase certified seeds from authorized seed dealers and apply for subsidy through MahaDBT portal or District Agriculture Office.',
     deadline: 'Before sowing season (Kharif: May-June, Rabi: September-October)',
-    applyUrl: 'https://mahadbtmahait.gov.in/',
+    applyUrl: 'https://mahadbt.maharashtra.gov.in/Farmer/RegistrationLogin/RegistrationLogin',
     verified: true,
     state: 'Maharashtra',
+    status: 'unknown',
   },
   {
     id: 'nhm',
@@ -134,6 +143,7 @@ const SCHEMES: Scheme[] = [
     applyUrl: 'https://midh.gov.in/',
     verified: true,
     state: 'Central',
+    status: 'unknown',
   },
   {
     id: 'kcc',
@@ -147,6 +157,7 @@ const SCHEMES: Scheme[] = [
     applyUrl: 'https://www.pmkisan.gov.in/Documents/Kcc.pdf',
     verified: true,
     state: 'Central',
+    status: 'open',
   },
   {
     id: 'fpo',
@@ -160,6 +171,7 @@ const SCHEMES: Scheme[] = [
     applyUrl: 'https://sfacindia.com/formation-and-promotion-of-fpo',
     verified: true,
     state: 'Central',
+    status: 'unknown',
   },
   {
     id: 'acds',
@@ -170,9 +182,10 @@ const SCHEMES: Scheme[] = [
     documents: ['Aadhaar card', '7/12 extract', 'Bank account details', 'Crop sowing certificate', 'Previous loan records (if any)'],
     applicationProcess: 'Apply at your bank branch before sowing season. Bank verifies land records and sanctions crop loan.',
     deadline: 'Before sowing season (Kharif: April-July, Rabi: September-November)',
-    applyUrl: 'https://www.mahadbtmahait.gov.in/',
+    applyUrl: 'https://www.myscheme.gov.in/schemes/kcc',
     verified: true,
     state: 'Both',
+    status: 'open',
   },
 ];
 
@@ -266,9 +279,20 @@ export function FarmerSchemes({ onBack }: { onBack: () => void }) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-primary-900 leading-tight">{scheme.name}</h3>
-                  <span className="inline-block mt-1 text-xs font-medium text-primary-500 bg-primary-50 px-2 py-0.5 rounded-md">
-                    {scheme.state}
-                  </span>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="inline-block text-xs font-medium text-primary-500 bg-primary-50 px-2 py-0.5 rounded-md">
+                      {scheme.state}
+                    </span>
+                    <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md ${
+                      scheme.status === 'open' ? 'bg-success-50 text-success-700'
+                      : scheme.status === 'closed' ? 'bg-error-50 text-error-700'
+                      : 'bg-accent-50 text-accent-700'
+                    }`}>
+                      {scheme.status === 'open' ? t('schemes.statusOpen')
+                        : scheme.status === 'closed' ? t('schemes.statusClosed')
+                        : t('schemes.statusUnknown')}
+                    </span>
+                  </div>
                 </div>
               </div>
               {scheme.verified && (
@@ -320,7 +344,7 @@ export function FarmerSchemes({ onBack }: { onBack: () => void }) {
       <div className="mt-6 space-y-3">
         <div className="grid sm:grid-cols-2 gap-4">
           <a
-            href="https://mahadbtmahait.gov.in/"
+            href="https://mahadbt.maharashtra.gov.in/Farmer/RegistrationLogin/RegistrationLogin"
             target="_blank"
             rel="noopener noreferrer"
             className="card p-5 flex items-center gap-3 hover:border-primary-300 transition-colors"
@@ -328,7 +352,7 @@ export function FarmerSchemes({ onBack }: { onBack: () => void }) {
             <Landmark className="w-8 h-8 text-primary-600" />
             <div>
               <p className="font-semibold text-primary-900">{t('schemes.mahaDBT')}</p>
-              <p className="text-xs text-primary-500">mahadbtmahait.gov.in</p>
+              <p className="text-xs text-primary-500">mahadbt.maharashtra.gov.in</p>
             </div>
             <ExternalLink className="w-4 h-4 text-primary-400 ml-auto" />
           </a>

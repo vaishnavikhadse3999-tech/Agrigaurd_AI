@@ -16,7 +16,6 @@ import { FarmerQuestions } from '@/pages/FarmerQuestions';
 import { TalkToAgriGuard } from '@/pages/TalkToAgriGuard';
 import { Intelligence } from '@/pages/Intelligence';
 import { ToolsGrid } from '@/pages/ToolsGrid';
-import { MandiPrices } from '@/pages/MandiPrices';
 import { FarmerSchemes } from '@/pages/FarmerSchemes';
 import { BusinessPlanner } from '@/pages/BusinessPlanner';
 import { RainfallAdvisor } from '@/pages/RainfallAdvisor';
@@ -106,7 +105,6 @@ function App() {
         <Intelligence farm={farm} onBack={back} onNavigate={navigate} />
       )}
       {page === 'tools' && <ToolsGrid onNavigate={navigate} onBack={back} />}
-      {page === 'mandi-prices' && <MandiPrices onBack={back} />}
       {page === 'schemes' && <FarmerSchemes onBack={back} />}
       {page === 'business-planner' && <BusinessPlanner onBack={back} />}
       {page === 'rainfall-advisor' && <RainfallAdvisor onBack={back} />}

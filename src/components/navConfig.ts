@@ -2,7 +2,7 @@ import {
   Home, Sprout, Stethoscope, CloudSun, Droplets,
   TrendingUp, AlertTriangle, Leaf, ClipboardList, Scale,
   LayoutGrid, Tractor, Menu, X, Calculator, HelpCircle, MessageCircle,
-  Store, Landmark, Briefcase, CloudRain,
+  Landmark, Briefcase, CloudRain,
 } from 'lucide-react';
 import type { PageKey } from '@/types';
 
@@ -15,7 +15,6 @@ export const NAV_ITEMS: { key: PageKey; label: string; icon: React.ComponentType
   { key: 'weather', label: 'Weather', icon: CloudSun },
   { key: 'water', label: 'Water & Irrigation', icon: Droplets },
   { key: 'market', label: 'Market Price', icon: TrendingUp },
-  { key: 'mandi-prices', label: 'Nearby Mandi Prices', icon: Store },
   { key: 'schemes', label: 'Farmer Schemes', icon: Landmark },
   { key: 'business-planner', label: 'Business Planner', icon: Briefcase },
   { key: 'rainfall-advisor', label: 'Rainfall Advisor', icon: CloudRain },
